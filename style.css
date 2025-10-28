@@ -18,20 +18,21 @@ body {
     line-height: 1.6;
 
     /* Hintergrundbild-Einstellungen */
-    background-image: url('Hintergund_Bad_Angels.jpeg'); /* PFAD ZUM BILD HIER ANPASSEN */
+    background-image: url('Hintergund_Bad_Angels.jpeg');
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
     background-repeat: no-repeat;
 }
 
-/* Container für den Hauptinhalt */
+/* 🚨 ANPASSUNG: Container nutzt volle Breite auf kleinen Geräten, aber bleibt begrenzt */
 main {
     max-width: 1200px;
-    width: 90%;
+    /* 90% Breite mit 20px links/rechts Abstand, aber mindestens 20px Padding insgesamt */
+    width: clamp(300px, 90%, 1200px); 
     margin: 40px auto;
     padding: 20px;
-    background-color: rgba(18, 18, 18, 0.9); /* Halbdurchsichtiger dunkler Container */
+    background-color: rgba(18, 18, 18, 0.9);
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
 }
@@ -50,7 +51,8 @@ section:last-of-type {
 /* Header und Navigation */
 header {
     background-color: rgba(0, 0, 0, 0.85);
-    padding: 10px 50px;
+    /* 🚨 ANPASSUNG: Padding flexibler gemacht */
+    padding: 10px clamp(10px, 5vw, 50px); 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -118,6 +120,12 @@ h2 {
     background: linear-gradient(rgba(18, 18, 18, 0.3), rgba(18, 18, 18, 0.3));
 }
 
+#hero img {
+    /* 🚨 NEU: Logo-Größe für Hero-Sektion anpassen */
+    max-width: 80%; 
+    height: auto;
+}
+
 #hero h1 {
     font-size: 4em;
     color: #fff;
@@ -155,10 +163,18 @@ h2 {
     font-size: 1.1em;
 }
 
+#about img {
+    /* 🚨 NEU: Sicherstellen, dass das Bandfoto auf Handys größer ist */
+    max-width: 90% !important; /* Wichtig, um das Inline-Style zu überschreiben */
+    height: auto; 
+}
+
+
 /* --- Bilder-Galerie Sektion --- */
 #image-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* 🚨 ANPASSUNG: minmax auf 250px reduziert, damit mehr Spalten passen */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
     gap: 15px;
     margin-top: 30px;
     padding: 0 20px;
@@ -182,10 +198,11 @@ h2 {
 /* --- 2D-Slider-Stile für die Videos (Flexbox) --- */
 /* ---------------------------------------------------- */
 
+/* 🚨 KRITISCH KORRIGIERT: Feste Breite entfernt */
 #video-carousel {
-    /* ✅ KRITISCH KORRIGIERT: Breite für 2 Videos (588px * 2 = 1176px) */
-    width: 1176px; 
-    height: 450px; 
+    max-width: 1200px; /* Max. Breite beibehalten */
+    width: 90%; /* Flexibel auf 90% der Haupt-Containerbreite */
+    height: auto; /* Höhe wird durch den Wrapper bestimmt */
     margin: 50px auto; 
     
     overflow: hidden; 
@@ -202,26 +219,37 @@ h2 {
     transition: transform 0.5s ease-in-out;
 }
 
+/* 🚨 KRITISCH KORRIGIERT: Breite des Items ist jetzt prozentual */
 .carousel-item {
     flex-shrink: 0; 
-    /* Breite des einzelnen Videos */
-    width: 568px; 
-    /* Höhe des einzelnen Videos */
-    height: 450px;
-    padding: 0 10px; /* Kleiner Abstand zwischen den Videos (Gesamt 588px) */
+    width: 50%; /* Zeigt 2 Videos (50% der #video-carousel Breite) */
+    height: auto;
+    padding: 0 10px; 
     box-sizing: border-box;
 }
 
+/* 🚨 NEU: Wrapper für 16:9-Seitenverhältnis */
+.iframe-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 Seitenverhältnis (9 / 16 * 100 = 56.25%) */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
 .carousel-item iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     display: block;
     border: none;
-    border-radius: 8px;
 }
 
 
-/* --- Navigations-Pfeile für das Karussell (SICHTBARKEIT KORRIGIERT) --- */
+/* --- Navigations-Pfeile für das Karussell --- */
 .carousel-nav-prev,
 .carousel-nav-next {
     position: absolute;
@@ -229,7 +257,6 @@ h2 {
     transform: translateY(-50%);
     z-index: 10;
     
-    /* Stile für Sichtbarkeit und Klickbarkeit */
     width: 40px;
     height: 40px;
     line-height: 40px;
@@ -237,7 +264,6 @@ h2 {
     font-size: 2em;
     font-weight: bold;
     
-    /* Farben (Zurückgesetzt auf Rock-Stil) */
     color: var(--color-background-dark); 
     background-color: var(--color-primary); 
     
@@ -253,7 +279,6 @@ h2 {
     transform: translateY(-50%) scale(1.05);
 }
 
-/* ✅ KRITISCH KORRIGIERT: Position der Pfeile (INNERHALB des Karussell-Containers) */
 .carousel-nav-prev {
     left: 10px; 
 }
@@ -262,53 +287,104 @@ h2 {
     right: 10px; 
 }
 
-/* --- Responsivität: Anpassung an kleinere Bildschirme (Mobile) --- */
-@media (max-width: 900px) {
-    /* Ab 900px wechseln wir auf 1 Video pro Ansicht */
+/* --- Kontakt Sektion --- */
+#contact a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+#contact a:hover {
+    color: var(--color-primary);
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 20px 10px;
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: var(--color-text-dim);
+    border-top: 1px solid var(--color-border);
+}
+
+footer a {
+    color: var(--color-text-dim);
+    margin: 0 5px;
+}
+
+/* ==================================================== */
+/* === RESPONSIVE DESIGN (Media Queries) === */
+/* ==================================================== */
+
+/* 🚨 Media Query für Tablets und kleinere Desktops */
+@media screen and (max-width: 1024px) {
+    h1 {
+        font-size: 3em;
+    }
+    h2 {
+        font-size: 1.8em;
+    }
+}
+
+/* 🚨 Media Query für Mobiltelefone (max-width: 768px) */
+@media screen and (max-width: 768px) {
     
-    main {
-        width: 95%;
-        padding: 10px;
-    }
-    
-    /* Karussell-Größe für Mobilgeräte anpassen (1 Video sichtbar) */
-    #video-carousel,
-    .carousel-item {
-        width: min(90vw, 500px); 
-        height: auto; 
-    }
-
-    #video-carousel {
-        /* Setzt die Höhe basierend auf der Breite (16:9 Seitenverhältnis) */
-        height: min(50.625vw, 281.25px); 
-    }
-
-    .carousel-item {
-        padding: 0; 
-        aspect-ratio: 16 / 9; /* Behält das korrekte Videoformat bei */
-        height: unset;
-    }
-
-    /* Navigationspfeile in den Container verschieben (für kleine Bildschirme) */
-    .carousel-nav-prev {
-        left: 5px; 
-    }
-
-    .carousel-nav-next {
-        right: 5px; 
-    }
-    
-    /* Header und Galerie Anpassungen */
+    /* Header/Navigation */
     header {
+        /* 🚨 KRITISCH: Header wird vertikal (Logo oben, Nav unten) */
         flex-direction: column;
-        padding: 10px;
+        text-align: center;
     }
 
     nav ul {
+        /* 🚨 Nav-Elemente werden mittig zentriert */
+        justify-content: center;
+        flex-wrap: wrap; /* Navigation bricht um, falls zu lang */
         margin-top: 10px;
     }
-    
+
+    nav ul li {
+        margin: 5px 10px;
+    }
+
+    /* Überschriften */
+    h1 {
+        font-size: 2.5em;
+    }
+    h2 {
+        font-size: 1.5em;
+    }
+
+    /* Hero */
+    #hero {
+        min-height: 50vh; /* Kürzere Hero-Sektion auf Mobilgeräten */
+    }
+
+    /* Galerie */
     #image-gallery {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        /* 🚨 Galerie auf 1 oder 2 Spalten begrenzen */
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        padding: 0 10px;
+        gap: 10px;
+    }
+
+    /* Karussell (KRITISCH) */
+    #video-carousel {
+        /* 🚨 KRITISCH: Nur 1 Video wird auf Handys angezeigt */
+        width: 100%; /* Nimmt die volle Breite des 'main' Containers */
+        max-width: 100%;
+        margin: 30px auto;
+    }
+
+    .carousel-item {
+        /* 🚨 KRITISCH: Das Item ist jetzt 100% der Karussell-Breite */
+        width: 100%; 
+        padding: 0 5px;
+    }
+    
+    /* Footer */
+    footer p {
+        font-size: 0.8em;
     }
 }
