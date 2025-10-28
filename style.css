@@ -1,319 +1,325 @@
-/* Globale Stile für dunkles, rockiges Aussehen */
+/* ======================================================= */
+/* Globale Stile und Variablen (Design-Token)             */
+/* ======================================================= */
 :root {
-    --color-primary: #BB86FC; /* Akzentfarbe (Lila/Magenta) */
-    --color-secondary: #03DAC6; /* Sekundäre Akzentfarbe (Cyan) */
-    --color-background-dark: #121212; /* Sehr dunkler Hintergrund */
-    --color-foreground-dark: #1e1e1e; /* Dunkler Haupt-Container-Hintergrund */
-    --color-text-light: #e0e0e0; /* Heller Text */
-    --color-text-dim: #999; /* Gedämpfter Text */
-    --color-border: #444; /* Dunkle Trennlinien */
+    --color-background-dark: #121212; /* Sehr dunkler Hintergrund */
+    --color-border: #444; /* Dunkle Trennlinien */
+    --color-foreground-dark: #1e1e1e; /* Dunkler Haupt-Container-Hintergrund */
+    --color-primary: #BB86FC; /* Akzentfarbe (Lila/Magenta) */
+    --color-secondary: #03DAC6; /* Sekundäre Akzentfarbe (Cyan) */
+    --color-text-dim: #999; /* Gedämpfter Text */
+    --color-text-light: #e0e0e0; /* Heller Text */
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: var(--color-background-dark); 
-    color: var(--color-text-light);
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-
-    /* Hintergrundbild-Einstellungen */
-    background-image: url('Hintergund_Bad_Angels.jpeg'); /* PFAD ZUM BILD HIER ANPASSEN */
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: var(--color-background-dark);
+    background-image: url('Hintergund_Bad_Angels.jpeg'); /* PFAD ZUM BILD HIER ANPASSEN */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: var(--color-text-light);
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
 }
+
+/* ======================================================= */
+/* Hauptstruktur (Main, Section, Header)                  */
+/* ======================================================= */
 
 /* Container für den Hauptinhalt */
 main {
-    max-width: 1200px;
-    width: 90%;
-    margin: 40px auto;
-    padding: 50px;
-    background-color: rgba(18, 18, 18, 0.9); /* Halbdurchsichtiger dunkler Container */
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    background-color: rgba(18, 18, 18, 0.9); /* Halbdurchsichtiger dunkler Container */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    margin: 40px auto;
+    max-width: 1200px;
+    padding: 50px;
+    width: 90%;
 }
 
 /* Allgemeine Sektionen */
 section {
-    padding: 40px 0;
-    text-align: center;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    padding: 40px 0;
+    text-align: center;
 }
 
 section:last-of-type {
-    border-bottom: none;
+    border-bottom: none;
 }
 
 /* Header und Navigation */
 header {
-    background-color: rgba(0, 0, 0, 0.85);
-    padding: 10px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.85);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 50px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 #header-logo img {
-    height: 60px;
-    width: auto;
+    height: 60px;
+    width: auto;
 }
 
+/* ======================================================= */
+/* Navigation und Links                                  */
+/* ======================================================= */
+
 nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 nav ul li {
-    margin-left: 20px;
+    margin-left: 20px;
 }
 
 nav a {
-    color: var(--color-text-light);
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1em;
-    padding: 5px 10px;
-    transition: color 0.3s, border-bottom 0.3s;
+    border-bottom: 0 solid var(--color-primary); /* Initialzustand für Transition */
+    color: var(--color-text-light);
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 5px 10px;
+    text-decoration: none;
+    transition: color 0.3s, border-bottom 0.3s;
 }
 
 nav a:hover {
-    color: var(--color-primary);
-    border-bottom: 2px solid var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+    color: var(--color-primary);
 }
+
+/* ======================================================= */
+/* Typografie                                            */
+/* ======================================================= */
 
 /* Überschriften */
 h1, h2 {
-    color: var(--color-primary);
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    color: var(--color-primary);
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 h1 {
-    font-size: 3em;
-    margin-bottom: 0.1em;
+    font-size: 3em;
+    margin-bottom: 0.1em;
 }
 
 h2 {
-    font-size: 2.2em;
-    margin-top: 0;
+    font-size: 2.2em;
+    margin-top: 0;
 }
 
 /* --- Hero Sektion (Startbildschirm) --- */
 #hero {
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
-    background: linear-gradient(rgba(18, 18, 18, 0.3), rgba(18, 18, 18, 0.3));
+    align-items: center;
+    background: linear-gradient(rgba(18, 18, 18, 0.3), rgba(18, 18, 18, 0.3));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 80vh;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
 }
 
 #hero h1 {
-    font-size: 4em;
-    color: #fff;
+    color: #fff;
+    font-size: 4em;
 }
 
 #hero h2 {
-    color: var(--color-secondary);
-    font-size: 1.5em;
-    margin-top: 5px;
+    color: var(--color-secondary);
+    font-size: 1.5em;
+    margin-top: 5px;
 }
 
 .cta-button {
-    display: inline-block;
-    padding: 15px 30px;
-    margin-top: 30px;
-    background-color: var(--color-primary);
-    color: var(--color-background-dark);
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: background-color 0.2s, transform 0.2s;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    background-color: var(--color-primary);
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    color: var(--color-background-dark);
+    display: inline-block;
+    font-weight: bold;
+    margin-top: 30px;
+    padding: 15px 30px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.2s, transform 0.2s;
 }
 
 .cta-button:hover {
-    background-color: #985fe2;
-    transform: translateY(-2px);
+    background-color: #985fe2;
+    transform: translateY(-2px);
 }
 
 /* --- Über uns Sektion --- */
 #about p {
-    max-width: 800px;
-    margin: 20px auto;
-    font-size: 1.1em;
+    font-size: 1.1em;
+    margin: 20px auto;
+    max-width: 800px;
 }
+
+/* ======================================================= */
+/* Galerie und Videos                                    */
+/* ======================================================= */
 
 /* --- Bilder-Galerie Sektion --- */
 #image-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 15px;
-    margin-top: 30px;
-    padding: 0 20px;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-top: 30px;
+    padding: 0 20px;
 }
 
 #image-gallery img {
-    width: 100%;
-    height: 300px; 
-    object-fit: cover; 
-    border-radius: 8px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
+    border-radius: 8px;
+    cursor: pointer;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 100%;
 }
 
 #image-gallery img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    transform: scale(1.03);
 }
 
-/* ---------------------------------------------------- */
 /* --- 2D-Slider-Stile für die Videos (Flexbox) --- */
-/* ---------------------------------------------------- */
 
 #video-carousel {
-    /* DESKTOP-BREITE: 1176px */
-    width: 1176px; 
-    height: 450px; 
-    margin: 50px auto; 
-    
-    overflow: hidden; 
-    position: relative; 
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    /* DESKTOP-BREITE: 1176px (568px Video + 20px Padding) * 2 */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    height: 450px;
+    margin: 50px auto;
+    overflow: hidden;
+    position: relative;
+    width: 1176px;
 }
 
 .carousel-container {
-    width: max-content; 
-    height: 100%;
-    display: flex; 
-    transform: translateX(0); 
-    transition: transform 0.5s ease-in-out;
+    display: flex;
+    height: 100%;
+    transform: translateX(0);
+    transition: transform 0.5s ease-in-out;
+    width: max-content;
 }
 
 .carousel-item {
-    flex-shrink: 0; 
-    /* Breite des einzelnen Videos */
-    width: 568px; 
-    /* Höhe des einzelnen Videos */
-    height: 450px;
-    padding: 0 10px; /* Kleiner Abstand zwischen den Videos (Gesamt 588px) */
-    box-sizing: border-box;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    height: 450px;
+    padding: 0 10px; /* Abstand zwischen den Videos */
+    width: 568px;
 }
 
 .carousel-item iframe {
-    width: 100%;
-    height: 100%;
-    display: block;
-    border: none;
-    border-radius: 8px;
+    border: none;
+    border-radius: 8px;
+    display: block;
+    height: 100%;
+    width: 100%;
 }
 
-
-/* --- Navigations-Pfeile für das Karussell (SICHTBARKEIT KORRIGIERT) --- */
+/* --- Navigations-Pfeile für das Karussell --- */
 .carousel-nav-prev,
 .carousel-nav-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    
-    /* Stile für Sichtbarkeit und Klickbarkeit */
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    font-size: 2em;
-    font-weight: bold;
-    
-    /* Farben (Zurückgesetzt auf Rock-Stil) */
-    color: var(--color-background-dark); 
-    background-color: var(--color-primary); 
-    
-    cursor: pointer;
-    border-radius: 50%;
-    transition: background-color 0.2s, transform 0.1s;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    color: var(--color-background-dark);
+    cursor: pointer;
+    font-size: 2em;
+    font-weight: bold;
+    height: 40px;
+    line-height: 40px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: background-color 0.2s, transform 0.1s;
+    width: 40px;
+    z-index: 10;
 }
 
 .carousel-nav-prev:hover,
 .carousel-nav-next:hover {
-    background-color: var(--color-secondary); 
-    transform: translateY(-50%) scale(1.05);
+    background-color: var(--color-secondary);
+    transform: translateY(-50%) scale(1.05);
 }
 
 /* Position der Pfeile */
 .carousel-nav-prev {
-    left: 10px; 
+    left: 10px;
 }
 
 .carousel-nav-next {
-    right: 10px; 
+    right: 10px;
 }
 
-/* --- Responsivität: Anpassung an kleinere Bildschirme (Mobile) --- */
+/* ======================================================= */
+/* Responsivität (Mobile-Ansicht)                        */
+/* ======================================================= */
 @media (max-width: 900px) {
-    /* Ab 900px wechseln wir auf 1 Video pro Ansicht */
-    
-    main {
-        width: 95%;
-        padding: 10px;
-    }
-    
-    /* Korrektur 1: Logo-Größe für Mobile 👇 */
-    #header-logo img {
-        height: 40px; 
+    /* --- Allgemeine Struktur --- */
+    main {
+        padding: 10px;
+        width: 95%;
     }
-    
-    /* Karussell-Größe für Mobilgeräte anpassen (1 Video sichtbar) */
-    #video-carousel {
-        /* Setze die Breite flexibel, damit sie in den Main-Container passt */
-        width: 100%; 
-        height: auto; 
-        max-width: 500px; /* Optional: nicht zu groß auf Tablets */
-        margin: 50px auto; /* Zentrieren */
-    }
 
-    .carousel-item {
-        /* Korrektur 2: Breite soll 100% des Containers (der jetzt schmal ist) sein */
+    /* --- Header und Navigation --- */
+    header {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    #header-logo img {
+        height: 40px; /* Reduzierte Logo-Größe */
+    }
+
+    nav ul {
+        margin-top: 10px;
+    }
+
+    /* --- Galerie --- */
+    #image-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    /* --- Karussell (Video) --- */
+    #video-carousel {
+        /* Setze die Breite flexibel auf 100% des Hauptcontainers */
+        height: auto;
+        margin: 50px auto;
+        max-width: 500px;
         width: 100%;
-        /* Ursprüngliche Mobile-Padding-Einstellung: */
-        padding: 0 10px; 
-        aspect-ratio: 16 / 9; 
-        height: unset;
-    }
+    }
 
-    /* Navigationspfeile in den Container verschieben (für kleine Bildschirme) */
-    .carousel-nav-prev {
-        left: 5px; 
-    }
+    .carousel-item {
+        /* Breite soll 100% des Containers (jetzt schmal) sein */
+        aspect-ratio: 16 / 9; /* Behält das korrekte Videoformat bei */
+        height: unset;
+        padding: 0 10px; /* Rand zum Display */
+        width: 100%;
+    }
 
-    .carousel-nav-next {
-        right: 5px; 
-    }
-    
-    /* Header und Galerie Anpassungen */
-    header {
-        flex-direction: column;
-        padding: 10px;
-    }
+    /* Position der Pfeile für kleine Bildschirme */
+    .carousel-nav-prev {
+        left: 5px;
+    }
 
-    nav ul {
-        margin-top: 10px;
-    }
-    
-    #image-gallery {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
+    .carousel-nav-next {
+        right: 5px;
+    }
 }
