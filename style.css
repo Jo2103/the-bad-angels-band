@@ -299,18 +299,20 @@ h2 {
 
     /* --- Karussell (Video) --- */
     #video-carousel {
-        /* Setze die Breite flexibel auf 100% des Hauptcontainers */
+        /* Setze die Breite flexibel auf 100% des Hauptcontainers (main) */
         height: auto;
         margin: 50px auto;
-        max-width: 500px;
-        width: 100%;
+        /* MAX-BREITE auf z.B. 500px begrenzen, um nicht zu riesig zu werden */
+        max-width: 500px; 
+        /* 👈 WICHTIG: Überschreibt die 1176px aus der Desktop-Ansicht */
+        width: 100%; 
     }
 
     .carousel-item {
         /* Breite soll 100% des Containers (jetzt schmal) sein */
         aspect-ratio: 16 / 9; /* Behält das korrekte Videoformat bei */
         height: unset;
-        padding: 0 10px; /* Rand zum Display */
+        padding: 0 10px; 
         width: 100%;
     }
 
