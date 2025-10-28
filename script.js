@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalItems = items.length; // Gesamtanzahl der Videos (7)
     
     // Die effektive Breite pro Element (568px width + 2*10px padding = 588px)
-    const itemWidth = 588; 
+    const itemWidth = items[0].offsetWidth; 
     
     let currentIndex = 0; 
 
