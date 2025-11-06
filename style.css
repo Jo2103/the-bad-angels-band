@@ -195,8 +195,7 @@ h2 {
 	transform: scale(1.03);
 }
 
-/* NEUE RESPONSIVE KLASSEN FÜR VIDEO-EMBEDS */
-/* Diese Klasse muss jedes iFrame umschließen (siehe HTML-Änderung) */
+/* 🚀 NEUE RESPONSIVE KLASSEN FÜR VIDEO-EMBEDS (FÜR JEDES EINZELNE VIDEO) */
 .embed-container {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 Verhältnis: 9/16 = 0.5625 */
@@ -219,10 +218,14 @@ h2 {
 /* --- 2D-Slider-Stile für die Videos (Flexbox) --- */
 
 #video-carousel {
-	/* Feste Breite entfernt und durch max-width/width ersetzt */
+	/* Standard-Desktop-Werte */
     max-width: 1176px;
 	width: 100%;
-	height: auto; /* Höhe wird durch padding des Containers bestimmt */
+	
+    /* 💡 NEUE HÖHENBERECHNUNG FÜR DESKTOP: 
+       Ein Video ist 588px breit. 588 * 9/16 = 330.75px. 
+       380px gibt dem Video + Puffer für Navigationspfeile Platz. */
+	height: 380px; 
 	
 	border-radius: 10px;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
@@ -232,29 +235,21 @@ h2 {
 }
 
 .carousel-container {
-	/* Höhe wird jetzt über padding gesteuert, um das Verhältnis zu sichern */
-    position: relative;
-    padding-bottom: 56.25%; /* Hält das 16:9-Verhältnis für den gesamten sichtbaren Bereich */
-    height: 0; 
-	
+	/* Der Scroll-Container braucht keine responsive Höhe */
 	display: flex;
+	height: 100%; /* Behält die Höhe des #video-carousel */
 	transform: translateX(0);
 	transition: transform 0.5s ease-in-out;
-	width: max-content; /* Beibehalten für die horizontale Verschiebung des Karussells */
+	width: max-content;
 }
 
 .carousel-item {
 	box-sizing: border-box;
 	flex-shrink: 0;
-	/* Höhe und feste Breite entfernt, da sie durch den #video-carousel bzw. .embed-container gesteuert werden */
-	padding: 0 10px; /* Abstand zwischen den Videos */
-	/* Desktop-Breite für 2 Videos nebeneinander: 1176px / 2 = 588px (davon 20px padding) */
+    height: 100%; /* Nimmt die Höhe des .carousel-container */
+	padding: 0 10px; 
 	width: 588px;
-    height: 100%;
 }
-
-/* Alte iframe-Regeln entfernt, da sie jetzt in .embed-container iframe sind */
-
 
 /* --- Navigations-Pfeile für das Karussell --- */
 .carousel-nav-prev,
@@ -309,7 +304,7 @@ h2 {
 	}
 
 	#header-logo img {
-		height: 40px; /* Reduzierte Logo-Größe */
+		height: 40px;
 	}
 
 	nav ul {
@@ -322,23 +317,36 @@ h2 {
 	}
 
 	/* --- Karussell (Video) --- */
-    /* Auf Mobile soll immer nur ein Video pro Ansicht gezeigt werden */
 	#video-carousel {
-		/* MAX-BREITE auf z.B. 500px begrenzen, um nicht zu riesig zu werden */
-		max-width: 500px;
-		width: 100%;
-        /* Die height: auto wird bereits im Hauptstil gesetzt, was korrekt ist */
+        /* 🚀 HÖHEN-FIX FÜR MOBILE: 
+           Wir nutzen den Padding-Trick auf dem Carousel selbst, wenn nur 1 Video sichtbar ist. 
+           Die Höhe (height: 0) wird durch padding-bottom (56.25% der Breite) bestimmt. */
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 Verhältnis der 100% Breite */
+        height: 0; 
+        overflow: hidden; 
+        
+        max-width: 500px; /* Beibehalten der max-width-Begrenzung */
+        width: 100%;
+        margin: 50px auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
 	}
 
 	.carousel-container {
-        /* Das padding-bottom bleibt bei 56.25% (16:9) und skaliert korrekt */
+        /* Auf Mobile: Muss absolut positioniert sein, um den Padding-Container zu füllen */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%; 
+        height: 100%;
     }
 
 	.carousel-item {
-		/* Breite soll 100% des Karussells sein, damit nur ein Video sichtbar ist */
+		/* Breite soll 100% des Carousels sein (1 Video pro Ansicht) */
 		width: 100%;
-        height: auto;
-		padding: 0 5px; /* Etwas weniger Padding auf Mobile */
+        height: 100%; /* Füllt den Container */
+		padding: 0 5px; 
 	}
     
 	/* Position der Pfeile für kleine Bildschirme */
